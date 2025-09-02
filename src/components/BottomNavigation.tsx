@@ -6,8 +6,8 @@ export default function BottomNavigation() {
   const navigate = useNavigate();
   const location = useLocation();
 
-  // Only show the bottom navigation on the home and wellness pages
-  if (location.pathname !== '/home' && location.pathname !== '/wellness') {
+  // Only show the bottom navigation on the home page (health section)
+  if (location.pathname !== '/home') {
     return null;
   }
 
