@@ -39,6 +39,8 @@ import PatientHistory from './pages/PatientHistory';
 import ChatSupport from './components/ChatSupport';
 import BottomNavigation from './components/BottomNavigation';
 import FacilityDashboard from './pages/FacilityDashboard';
+import FacilityRegistration from './pages/FacilityRegistration';
+import FacilityStaffManagement from './pages/FacilityStaffManagement';
 
 export default function App() {
   return (
