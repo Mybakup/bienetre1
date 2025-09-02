@@ -47,11 +47,11 @@ export default function App() {
       <Routes>
         {/* Public routes */}
         <Route path="/" element={<Welcome />} />
+        <Route path="/home" element={<Home />} />
+        <Route path="/wellness" element={<Wellness />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/reset-password" element={<ResetPassword />} />
-        <Route path="/home" element={<Home />} />
-        <Route path="/wellness" element={<Wellness />} />
         <Route path="/search" element={<DoctorSearch />} />
         <Route path="/voice-command" element={<VoiceCommand />} />
         <Route path="/voice-command-v2" element={<VoiceCommandV2 />} />

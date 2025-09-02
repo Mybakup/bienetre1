@@ -13,59 +13,193 @@ import {
   Zap,
   Waves,
   Flower2,
-  X
+  X,
+  Star,
+  MapPin,
+  Calendar,
+  Clock,
+  Globe,
+  MessageSquare,
+  Share2,
+  Check,
+  Award,
+  Target,
+  Zap as Lightning
 } from 'lucide-react';
 import { useAuth } from '../contexts/AuthContext';
+import CoachProfile from '../components/wellness/CoachProfile';
 
-interface WellnessCategory {
+interface Coach {
   id: string;
-  title: string;
-  subtitle: string;
+  name: string;
+  specialty: string;
+  rating: number;
+  reviewCount: number;
+  location: string;
+  availability: string;
+  imageUrl: string;
+  bannerUrl: string;
+  languages: string[];
   description: string;
-  icon: React.ReactNode;
-  color: string;
-  bgColor: string;
-  image: string;
-  features: string[];
-  path: string;
+  certifications: string[];
+  clientsCount: number;
+  recommendations: number;
+  pricing: {
+    individual: number;
+    pack5: number;
+  };
+  services: string[];
+  locations: string[];
+  testimonials: {
+    name: string;
+    avatar: string;
+    rating: number;
+    text: string;
+    date: string;
+  }[];
+  isVerified: boolean;
+  responseTime: string;
 }
 
-const wellnessCategories: WellnessCategory[] = [
+const coaches: Coach[] = [
   {
-    id: 'coaches',
-    title: 'Coachs & activités',
-    subtitle: '🧘 Accompagnement personnalisé',
-    description: 'Trouvez des coachs sportifs, nutritionnistes et thérapeutes près de vous',
-    icon: <Users className="w-8 h-8 text-purple-600" />,
-    color: 'from-purple-400 to-indigo-500',
-    bgColor: 'bg-purple-50',
-    image: 'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?auto=format&fit=crop&q=80&w=600&h=400',
-    features: ['Coachs sportifs', 'Nutritionnistes', 'Thérapeutes', 'Cours en groupe'],
-    path: '/wellness/coaches'
+    id: '1',
+    name: 'Emma Rodriguez',
+    specialty: 'Coach Fitness & Nutrition',
+    rating: 4.9,
+    reviewCount: 127,
+    location: 'Marseille, FR',
+    availability: 'Disponible cette semaine',
+    imageUrl: 'https://images.unsplash.com/photo-1594736797933-d0501ba2fe65?auto=format&fit=crop&q=80&w=300&h=300',
+    bannerUrl: 'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?auto=format&fit=crop&q=80&w=800&h=400',
+    languages: ['Français', 'English', 'Español'],
+    description: 'Coach sportive diplômée et nutritionniste, Emma propose des séances personnalisées adaptées aux voyageurs, familles et expatriés. Approche bienveillante, résultats durables, bien-être garanti.',
+    certifications: ['Coach Sportif Certifié', 'Nutritionniste Diplômée', 'Yoga Alliance RYT-200'],
+    clientsCount: 340,
+    recommendations: 89,
+    pricing: {
+      individual: 40,
+      pack5: 180
+    },
+    services: ['Fitness', 'Nutrition', 'Yoga', 'Pilates'],
+    locations: ['En salle', 'En extérieur', 'À domicile', 'En visio'],
+    testimonials: [
+      {
+        name: 'Sophie M.',
+        avatar: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&q=80&w=100&h=100',
+        rating: 5,
+        text: 'Emma m\'a aidée à retrouver ma forme pendant mon séjour à Marseille. Ses conseils nutrition sont parfaits !',
+        date: '2024-03-15'
+      },
+      {
+        name: 'Thomas L.',
+        avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=100&h=100',
+        rating: 5,
+        text: 'Séances de yoga exceptionnelles avec vue sur la mer. Emma s\'adapte parfaitement aux débutants.',
+        date: '2024-03-10'
+      }
+    ],
+    isVerified: true,
+    responseTime: '< 2h'
   },
   {
-    id: 'facilities',
-    title: 'Salles & infrastructures',
-    subtitle: '🏋️ Équipements sportifs',
-    description: 'Accédez aux meilleures salles de sport et infrastructures sportives',
-    icon: <Dumbbell className="w-8 h-8 text-blue-600" />,
-    color: 'from-blue-400 to-cyan-500',
-    bgColor: 'bg-blue-50',
-    image: 'https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=format&fit=crop&q=80&w=600&h=400',
-    features: ['Salles de sport', 'Piscines', 'Courts de tennis', 'Centres fitness'],
-    path: '/wellness/facilities'
+    id: '2',
+    name: 'Marcus Thompson',
+    specialty: 'Coach CrossFit & Préparation Physique',
+    rating: 4.8,
+    reviewCount: 93,
+    location: 'Nice, FR',
+    availability: 'Disponible demain',
+    imageUrl: 'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?auto=format&fit=crop&q=80&w=300&h=300',
+    bannerUrl: 'https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=format&fit=crop&q=80&w=800&h=400',
+    languages: ['English', 'Français'],
+    description: 'Ancien athlète professionnel reconverti en coach CrossFit. Marcus accompagne les voyageurs dans leur remise en forme avec des programmes intensifs et motivants.',
+    certifications: ['CrossFit Level 2 Trainer', 'Préparateur Physique Certifié', 'First Aid Certified'],
+    clientsCount: 280,
+    recommendations: 67,
+    pricing: {
+      individual: 45,
+      pack5: 200
+    },
+    services: ['CrossFit', 'Musculation', 'Cardio', 'Préparation physique'],
+    locations: ['En salle', 'En extérieur', 'En visio'],
+    testimonials: [
+      {
+        name: 'Julie K.',
+        avatar: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&q=80&w=100&h=100',
+        rating: 5,
+        text: 'Marcus m\'a fait découvrir le CrossFit pendant mes vacances. Maintenant j\'en fais chez moi !',
+        date: '2024-03-12'
+      }
+    ],
+    isVerified: true,
+    responseTime: '< 1h'
   },
   {
-    id: 'relaxation',
-    title: 'Spas & détente',
-    subtitle: '💆 Relaxation et soins',
-    description: 'Détendez-vous dans les meilleurs spas et centres de bien-être',
-    icon: <Sparkles className="w-8 h-8 text-emerald-600" />,
-    color: 'from-emerald-400 to-teal-500',
-    bgColor: 'bg-emerald-50',
-    image: 'https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&q=80&w=600&h=400',
-    features: ['Spas & hammams', 'Massages', 'Cryothérapie', 'Yoga & méditation'],
-    path: '/wellness/relaxation'
+    id: '3',
+    name: 'Amélie Dubois',
+    specialty: 'Thérapeute Spa & Relaxation',
+    rating: 4.9,
+    reviewCount: 156,
+    location: 'Cannes, FR',
+    availability: 'Disponible aujourd\'hui',
+    imageUrl: 'https://images.unsplash.com/photo-1559839734-2b71ea197ec2?auto=format&fit=crop&q=80&w=300&h=300',
+    bannerUrl: 'https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&q=80&w=800&h=400',
+    languages: ['Français', 'English', 'Italiano'],
+    description: 'Thérapeute certifiée en massages thérapeutiques et relaxation. Amélie offre une expérience de détente unique dans un cadre idyllique face à la Méditerranée.',
+    certifications: ['Massothérapeute Certifiée', 'Aromathérapie', 'Réflexologie Plantaire'],
+    clientsCount: 420,
+    recommendations: 112,
+    pricing: {
+      individual: 60,
+      pack5: 270
+    },
+    services: ['Massage thérapeutique', 'Aromathérapie', 'Réflexologie', 'Relaxation'],
+    locations: ['En spa', 'À domicile', 'En extérieur'],
+    testimonials: [
+      {
+        name: 'Marie P.',
+        avatar: 'https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&q=80&w=100&h=100',
+        rating: 5,
+        text: 'Un moment de pure détente ! Amélie a des mains magiques et un accueil chaleureux.',
+        date: '2024-03-18'
+      }
+    ],
+    isVerified: true,
+    responseTime: '< 30min'
+  },
+  {
+    id: '4',
+    name: 'Yuki Tanaka',
+    specialty: 'Professeur de Yoga & Méditation',
+    rating: 4.9,
+    reviewCount: 89,
+    location: 'Paris, FR',
+    availability: 'Disponible cette semaine',
+    imageUrl: 'https://images.unsplash.com/photo-1506629905607-d405d7d3b0d2?auto=format&fit=crop&q=80&w=300&h=300',
+    bannerUrl: 'https://images.unsplash.com/photo-1588286840104-8957b019727f?auto=format&fit=crop&q=80&w=800&h=400',
+    languages: ['Français', 'English', '日本語'],
+    description: 'Maître de yoga traditionnel formé au Japon et en Inde. Yuki enseigne le Hatha et Vinyasa yoga avec une approche méditative profonde pour tous niveaux.',
+    certifications: ['Yoga Alliance RYT-500', 'Méditation Mindfulness', 'Reiki Level 2'],
+    clientsCount: 190,
+    recommendations: 78,
+    pricing: {
+      individual: 35,
+      pack5: 160
+    },
+    services: ['Hatha Yoga', 'Vinyasa', 'Méditation', 'Reiki'],
+    locations: ['En studio', 'En extérieur', 'À domicile', 'En visio'],
+    testimonials: [
+      {
+        name: 'Claire B.',
+        avatar: 'https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?auto=format&fit=crop&q=80&w=100&h=100',
+        rating: 5,
+        text: 'Yuki m\'a initiée au yoga pendant mon voyage à Paris. Une expérience transformatrice !',
+        date: '2024-03-14'
+      }
+    ],
+    isVerified: true,
+    responseTime: '< 1h'
   }
 ];
 
@@ -73,7 +207,7 @@ export default function Wellness() {
   const navigate = useNavigate();
   const { user } = useAuth();
   const [showNotifications, setShowNotifications] = useState(false);
-  const [hoveredCard, setHoveredCard] = useState<string | null>(null);
+  const [selectedCoach, setSelectedCoach] = useState<Coach | null>(null);
 
   // Animation variants
   const containerVariants = {
@@ -82,7 +216,7 @@ export default function Wellness() {
       opacity: 1,
       transition: {
         when: "beforeChildren",
-        staggerChildren: 0.15
+        staggerChildren: 0.1
       }
     }
   };
@@ -112,8 +246,8 @@ export default function Wellness() {
       }
     },
     hover: {
-      scale: 1.03,
-      y: -8,
+      scale: 1.02,
+      y: -5,
       transition: {
         type: "spring",
         stiffness: 400,
@@ -166,14 +300,14 @@ export default function Wellness() {
 
       {/* Main Content */}
       <motion.main 
-        className="relative z-10 max-w-6xl mx-auto px-4 py-12"
+        className="relative z-10 max-w-6xl mx-auto px-4 py-8"
         variants={containerVariants}
         initial="hidden"
         animate="visible"
       >
         {/* Welcome Section */}
         <motion.div 
-          className="text-center mb-12"
+          className="text-center mb-8"
           variants={itemVariants}
         >
           <div className="flex items-center justify-center gap-2 mb-4">
@@ -186,7 +320,7 @@ export default function Wellness() {
             Prenez soin de votre corps et de votre esprit
           </p>
           <p className="text-sm text-gray-500 max-w-2xl mx-auto">
-            Découvrez une sélection de professionnels du bien-être, d'infrastructures sportives et de centres de détente pour enrichir votre expérience de voyage
+            Découvrez nos coachs certifiés pour enrichir votre expérience de voyage
           </p>
         </motion.div>
 
@@ -200,83 +334,148 @@ export default function Wellness() {
               Bonjour <span className="font-semibold">{user.firstName}</span> ! 🌿
             </p>
             <p className="text-gray-600 mt-1">
-              Que souhaitez-vous découvrir aujourd'hui ?
+              Découvrez nos coachs bien-être près de vous
             </p>
           </motion.div>
         )}
 
-        {/* Wellness Categories */}
+        {/* Coaches Grid - 2 per row */}
         <motion.div 
-          className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-12"
+          className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12"
           variants={itemVariants}
         >
-          {wellnessCategories.map((category, index) => (
+          {coaches.map((coach, index) => (
             <motion.div
-              key={category.id}
+              key={coach.id}
               variants={cardVariants}
               whileHover="hover"
-              whileTap={{ scale: 0.95 }}
-              onClick={() => navigate(category.path)}
-              onMouseEnter={() => setHoveredCard(category.id)}
-              onMouseLeave={() => setHoveredCard(null)}
-              className={`relative ${category.bgColor} rounded-2xl overflow-hidden cursor-pointer border border-white/50 shadow-lg group`}
+              whileTap={{ scale: 0.98 }}
+              onClick={() => setSelectedCoach(coach)}
+              className="bg-white rounded-2xl overflow-hidden cursor-pointer border border-white/50 shadow-lg group"
             >
-              {/* Image Section */}
+              {/* Banner Image */}
               <div className="relative h-48 overflow-hidden">
                 <img
-                  src={category.image}
-                  alt={category.title}
+                  src={coach.bannerUrl}
+                  alt={`${coach.name} coaching session`}
                   className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent" />
                 
-                {/* Icon overlay */}
-                <motion.div 
-                  className="absolute top-4 right-4 p-3 rounded-full bg-white/20 backdrop-blur-sm"
-                  whileHover={{ rotate: 10, scale: 1.1 }}
-                  transition={{ type: "spring", stiffness: 300 }}
-                >
-                  {category.icon}
-                </motion.div>
+                {/* Availability badge */}
+                <div className="absolute top-4 right-4 px-3 py-1 bg-green-500 text-white text-sm font-medium rounded-full flex items-center gap-1">
+                  <div className="w-2 h-2 bg-white rounded-full animate-pulse" />
+                  {coach.availability}
+                </div>
                 
-                {/* Title overlay */}
-                <div className="absolute bottom-4 left-4 right-4">
-                  <h3 className="text-xl font-bold text-white mb-1">
-                    {category.title}
-                  </h3>
-                  <p className="text-white/90 text-sm">
-                    {category.subtitle}
-                  </p>
+                {/* Profile photo */}
+                <div className="absolute -bottom-8 left-6">
+                  <div className="relative">
+                    <img
+                      src={coach.imageUrl}
+                      alt={coach.name}
+                      className="w-16 h-16 rounded-full border-4 border-white object-cover shadow-lg"
+                    />
+                    {coach.isVerified && (
+                      <div className="absolute -bottom-1 -right-1 w-6 h-6 bg-green-500 rounded-full flex items-center justify-center border-2 border-white">
+                        <Check className="w-3 h-3 text-white" />
+                      </div>
+                    )}
+                  </div>
                 </div>
               </div>
 
-              {/* Content Section */}
-              <div className="p-6 space-y-4">
-                <p className="text-gray-600 leading-relaxed">
-                  {category.description}
-                </p>
-                
+              {/* Content */}
+              <div className="pt-12 p-6 space-y-4">
+                {/* Header info */}
                 <div className="space-y-2">
-                  {category.features.map((feature, idx) => (
-                    <div key={idx} className="flex items-center gap-2">
-                      <div className="w-1.5 h-1.5 rounded-full bg-green-500" />
-                      <span className="text-sm text-gray-600">{feature}</span>
+                  <div className="flex items-start justify-between">
+                    <div>
+                      <h3 className="text-xl font-bold text-green-700 group-hover:text-green-600 transition-colors">
+                        {coach.name}
+                      </h3>
+                      <p className="text-gray-600 font-medium">
+                        {coach.specialty}
+                      </p>
                     </div>
-                  ))}
+                    <div className="flex items-center gap-1">
+                      <Star className="w-4 h-4 text-yellow-400 fill-current" />
+                      <span className="font-semibold text-gray-700">{coach.rating}</span>
+                      <span className="text-sm text-gray-500">({coach.reviewCount})</span>
+                    </div>
+                  </div>
+                  
+                  <div className="flex items-center gap-4 text-sm text-gray-500">
+                    <div className="flex items-center gap-1">
+                      <MapPin className="w-4 h-4" />
+                      <span>{coach.location}</span>
+                    </div>
+                    <div className="flex items-center gap-1">
+                      <Clock className="w-4 h-4" />
+                      <span>Répond en {coach.responseTime}</span>
+                    </div>
+                  </div>
                 </div>
-                
+
+                {/* Description */}
+                <p className="text-gray-600 text-sm leading-relaxed line-clamp-3">
+                  {coach.description}
+                </p>
+
+                {/* Services tags */}
+                <div className="flex flex-wrap gap-2">
+                  {coach.services.slice(0, 3).map((service, idx) => (
+                    <span 
+                      key={idx}
+                      className="px-2 py-1 bg-green-100 text-green-700 text-xs font-medium rounded-full"
+                    >
+                      {service}
+                    </span>
+                  ))}
+                  {coach.services.length > 3 && (
+                    <span className="px-2 py-1 bg-gray-100 text-gray-600 text-xs font-medium rounded-full">
+                      +{coach.services.length - 3}
+                    </span>
+                  )}
+                </div>
+
+                {/* Languages */}
+                <div className="flex items-center gap-2">
+                  <Globe className="w-4 h-4 text-gray-400" />
+                  <span className="text-sm text-gray-600">
+                    {coach.languages.join(', ')}
+                  </span>
+                </div>
+
+                {/* Stats */}
+                <div className="flex items-center justify-between pt-2 border-t border-gray-100">
+                  <div className="flex items-center gap-4 text-sm">
+                    <div className="flex items-center gap-1">
+                      <Users className="w-4 h-4 text-blue-500" />
+                      <span className="text-gray-600">{coach.clientsCount} clients</span>
+                    </div>
+                    <div className="flex items-center gap-1">
+                      <Heart className="w-4 h-4 text-red-500" />
+                      <span className="text-gray-600">{coach.recommendations} recommandations</span>
+                    </div>
+                  </div>
+                  <div className="text-right">
+                    <div className="text-lg font-bold text-green-600">
+                      {coach.pricing.individual}€
+                    </div>
+                    <div className="text-xs text-gray-500">
+                      / séance
+                    </div>
+                  </div>
+                </div>
+
+                {/* Action button */}
                 <motion.div 
                   className="flex items-center gap-2 text-green-600 font-medium pt-2"
-                  animate={{ 
-                    x: hoveredCard === category.id ? [0, 5, 0] : 0 
-                  }}
-                  transition={{ 
-                    duration: 1.5, 
-                    repeat: hoveredCard === category.id ? Infinity : 0,
-                    repeatType: "loop"
-                  }}
+                  whileHover={{ x: 5 }}
+                  transition={{ type: "spring", stiffness: 400 }}
                 >
-                  <span>Découvrir</span>
+                  <span>Voir le profil complet</span>
                   <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                 </motion.div>
               </div>
@@ -301,17 +500,17 @@ export default function Wellness() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             <div className="text-center space-y-3">
               <div className="p-4 rounded-full bg-purple-100 w-fit mx-auto">
-                <Heart className="w-6 h-6 text-purple-600" />
+                <Award className="w-6 h-6 text-purple-600" />
               </div>
               <h3 className="font-semibold text-gray-800">Professionnels certifiés</h3>
               <p className="text-sm text-gray-600">
-                Tous nos partenaires sont vérifiés et certifiés dans leur domaine
+                Tous nos coachs sont vérifiés et certifiés dans leur domaine
               </p>
             </div>
             
             <div className="text-center space-y-3">
               <div className="p-4 rounded-full bg-blue-100 w-fit mx-auto">
-                <Zap className="w-6 h-6 text-blue-600" />
+                <Lightning className="w-6 h-6 text-blue-600" />
               </div>
               <h3 className="font-semibold text-gray-800">Réservation instantanée</h3>
               <p className="text-sm text-gray-600">
@@ -321,7 +520,7 @@ export default function Wellness() {
             
             <div className="text-center space-y-3">
               <div className="p-4 rounded-full bg-emerald-100 w-fit mx-auto">
-                <Waves className="w-6 h-6 text-emerald-600" />
+                <Target className="w-6 h-6 text-emerald-600" />
               </div>
               <h3 className="font-semibold text-gray-800">Expérience sur-mesure</h3>
               <p className="text-sm text-gray-600">
@@ -345,6 +544,14 @@ export default function Wellness() {
           </button>
         </motion.div>
       </motion.main>
+
+      {/* Coach Profile Modal */}
+      {selectedCoach && (
+        <CoachProfile 
+          coach={selectedCoach} 
+          onClose={() => setSelectedCoach(null)} 
+        />
+      )}
     </div>
   );
 }

@@ -8,6 +8,9 @@ import {
   Flower2, 
   ArrowRight,
   Globe,
+  Shield,
+  MessageSquare,
+  Clock,
   X
 } from 'lucide-react';
 import { useAuth } from '../contexts/AuthContext';
