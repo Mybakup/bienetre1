@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 import { 
   MessageSquare, 
   Send, 
@@ -22,7 +23,6 @@ import {
 import { useAuth } from '../contexts/AuthContext';
 import { mockDoctors } from '../data/mockDoctors';
 import { specialties } from '../data/specialties';
-import { useNavigate } from 'react-router-dom';
 
 interface Message {
   id: string;
@@ -98,6 +98,7 @@ const humanAdvisors = [
 export default function ChatSupport() {
   const navigate = useNavigate();
   const { user } = useAuth();
+  const location = useLocation();
   const [isOpen, setIsOpen] = useState(false);
   const [message, setMessage] = useState('');
   const [messages, setMessages] = useState<Message[]>([]);
@@ -112,6 +113,11 @@ export default function ChatSupport() {
   const [connectedHumanAdvisor, setConnectedHumanAdvisor] = useState<typeof humanAdvisors[0] | null>(null);
   const [connectionProgress, setConnectionProgress] = useState(0);
   const [showClearConfirm, setShowClearConfirm] = useState(false);
+
+  // Only show chat support in health section, not in wellness
+  if (location.pathname === '/wellness' || location.pathname.startsWith('/wellness/')) {
+    return null;
+  }
 
   const clearHistory = () => {
     setMessages([{
