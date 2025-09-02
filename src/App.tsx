@@ -1,7 +1,8 @@
 import React from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
 import PrivateRoute from './components/PrivateRoute';
-import Layout from './components/Layout';
+import ChatSupport from './components/ChatSupport';
+import BottomNavigation from './components/BottomNavigation';
 import Welcome from './pages/Welcome';
 import Wellness from './pages/Wellness';
 import Login from './pages/Login';
@@ -42,120 +43,123 @@ import FacilityStaffManagement from './pages/FacilityStaffManagement';
 
 export default function App() {
   return (
-    <Routes>
-      <Route path="/*" element={<Layout />}>
-        <Route index element={<Welcome />} />
-        <Route path="home" element={<Home />} />
-        <Route path="wellness" element={<Wellness />} />
-        <Route path="login" element={<Login />} />
-        <Route path="signup" element={<Signup />} />
-        <Route path="reset-password" element={<ResetPassword />} />
-        <Route path="search" element={<DoctorSearch />} />
-        <Route path="voice-command" element={<VoiceCommand />} />
-        <Route path="voice-command-v2" element={<VoiceCommandV2 />} />
-        <Route path="insurance" element={<Insurance />} />
-        <Route path="insurance/travel" element={<TravelInsurance />} />
-        <Route path="insurance/expat" element={<ExpatInsurance />} />
-        <Route path="insurance/confirmation" element={<InsuranceConfirmation />} />
-        <Route path="chat-advisor" element={<ChatAdvisor />} />
-        <Route path="translator" element={<MedicationTranslator />} />
-        <Route path="medication-locator" element={<MedicationLocator />} />
-        <Route path="medical-translator" element={<MedicalTranslator />} />
-        <Route path="profile-choice" element={<ProfileChoice />} />
-        <Route path="health-tips" element={<HealthTips />} />
-        <Route path="partner/malakoff-humanis" element={<MalakoffHumanis />} />
+    <div className="min-h-screen">
+      <Routes>
+        <Route path="/" element={<Welcome />} />
+        <Route path="/home" element={<Home />} />
+        <Route path="/wellness" element={<Wellness />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/signup" element={<Signup />} />
+        <Route path="/reset-password" element={<ResetPassword />} />
+        <Route path="/search" element={<DoctorSearch />} />
+        <Route path="/voice-command" element={<VoiceCommand />} />
+        <Route path="/voice-command-v2" element={<VoiceCommandV2 />} />
+        <Route path="/insurance" element={<Insurance />} />
+        <Route path="/insurance/travel" element={<TravelInsurance />} />
+        <Route path="/insurance/expat" element={<ExpatInsurance />} />
+        <Route path="/insurance/confirmation" element={<InsuranceConfirmation />} />
+        <Route path="/chat-advisor" element={<ChatAdvisor />} />
+        <Route path="/translator" element={<MedicationTranslator />} />
+        <Route path="/medication-locator" element={<MedicationLocator />} />
+        <Route path="/medical-translator" element={<MedicalTranslator />} />
+        <Route path="/profile-choice" element={<ProfileChoice />} />
+        <Route path="/health-tips" element={<HealthTips />} />
+        <Route path="/partner/malakoff-humanis" element={<MalakoffHumanis />} />
 
         {/* Protected routes */}
-        <Route path="appointment" element={
+        <Route path="/appointment" element={
           <PrivateRoute>
             <AppointmentScheduling />
           </PrivateRoute>
         } />
-        <Route path="appointment/confirmation" element={
+        <Route path="/appointment/confirmation" element={
           <PrivateRoute>
             <AppointmentConfirmation />
           </PrivateRoute>
         } />
-        <Route path="appointments" element={
+        <Route path="/appointments" element={
           <PrivateRoute>
             <Appointments />
           </PrivateRoute>
         } />
-        <Route path="appointments/:id" element={
+        <Route path="/appointments/:id" element={
           <PrivateRoute>
             <AppointmentDetails />
           </PrivateRoute>
         } />
-        <Route path="appointments/pending/:id" element={
+        <Route path="/appointments/pending/:id" element={
           <PrivateRoute>
             <PendingAppointmentDetails />
           </PrivateRoute>
         } />
-        <Route path="profile" element={
+        <Route path="/profile" element={
           <PrivateRoute>
             <Profile />
           </PrivateRoute>
         } />
-        <Route path="practitioner-type" element={
+        <Route path="/practitioner-type" element={
           <PrivateRoute>
             <PractitionerTypeChoice />
           </PrivateRoute>
         } />
-        <Route path="practitioner-signup" element={
+        <Route path="/practitioner-signup" element={
           <PrivateRoute>
             <PractitionerSignup />
           </PrivateRoute>
         } />
-        <Route path="practitioner-info" element={
+        <Route path="/practitioner-info" element={
           <PrivateRoute>
             <PractitionerInfo />
           </PrivateRoute>
         } />
-        <Route path="practitioner-preview" element={
+        <Route path="/practitioner-preview" element={
           <PrivateRoute>
             <PractitionerPreview />
           </PrivateRoute>
         } />
-        <Route path="practitioner-dashboard" element={
+        <Route path="/practitioner-dashboard" element={
           <PrivateRoute>
             <PractitionerDashboard />
           </PrivateRoute>
         } />
-        <Route path="professional-details" element={
+        <Route path="/professional-details" element={
           <PrivateRoute>
             <ProfessionalDetails />
           </PrivateRoute>
         } />
-        <Route path="travel-guide" element={
+        <Route path="/travel-guide" element={
           <PrivateRoute>
             <TravelGuide />
           </PrivateRoute>
         } />
-        <Route path="patients" element={
+        <Route path="/patients" element={
           <PrivateRoute>
             <PatientHistory />
           </PrivateRoute>
         } />
 
         {/* Facility routes */}
-        <Route path="facility-dashboard" element={
+        <Route path="/facility-dashboard" element={
           <PrivateRoute>
             <FacilityDashboard />
           </PrivateRoute>
         } />
-        <Route path="facility-registration" element={
+        <Route path="/facility-registration" element={
           <PrivateRoute>
             <FacilityRegistration />
           </PrivateRoute>
         } />
-        <Route path="facility-staff" element={
+        <Route path="/facility-staff" element={
           <PrivateRoute>
             <FacilityStaffManagement />
           </PrivateRoute>
         } />
 
         <Route path="*" element={<Navigate to="/" replace />} />
-      </Route>
-    </Routes>
+      </Routes>
+      
+      <ChatSupport />
+      <BottomNavigation />
+    </div>
   );
 }
